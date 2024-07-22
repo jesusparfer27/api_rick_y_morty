@@ -1,13 +1,11 @@
 import './App.css'
-import { Episodes } from './episodios/Episodes'
-import { Locations } from './ubicaciones/Locations'
-import { Characters } from './personajes/Characters'
+import { Categories } from './categories/Categories'
 
 function App() {
 
   return (
     <>
-      
+      <Categories/>
     </>
   )
 }

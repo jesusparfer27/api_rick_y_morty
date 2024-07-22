@@ -1,0 +1,12 @@
+.TittleH1 {
+    font-size: 3rem;
+    text-align: center;
+    margin: 2rem;
+}
+
+.listaUl {
+    display: flex;
+    gap: 3rem;
+    font-size: 1.5rem;
+    justify-content: center;
+}

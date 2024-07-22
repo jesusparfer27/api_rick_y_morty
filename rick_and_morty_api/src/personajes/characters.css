@@ -1,0 +1,22 @@
+html {
+    background-color: r;
+}
+
+.charactersContainer {
+    display: flex;
+    justify-content: center;
+    margin: 5rem; 
+}
+
+.charactersCard {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+
+}
+
+.flexWrap {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}

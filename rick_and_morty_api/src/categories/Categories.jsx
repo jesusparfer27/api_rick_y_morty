@@ -1,48 +1,31 @@
 import React from "react";
-import { useState, useEffect } from React
+import { Episodes } from '../episodios/Episodes'
+import { Locations } from '../ubicaciones/Locations'
+import { Characters } from '../personajes/Characters'
+import { useState, useEffect } from 'react'
+import './categories.css'
 
 export const Categories = () => {
 
-    const [link, setLink] = useState([])
+    const [seccion, setSeccion] = useState("characters")
 
-    useEffect(() => {
 
-        const button = document.getElementByClassName("buttonStyleCategories")
-        button.addEventListener("click", setLink)
-
-    }, [])
-
-    const fetchingData = async () => {
-        try {
-            const answer = await fetch(`{https://rickandmortyapi.com/api/${link}`)
-            const gettingData = await answer.json()
-        } catch (e) {
-            console.error("No encuentro la dirección")
-        }
-    }
-
-    const goToLink = () => {
-        setLink = () => {
-
-        } 
-    }
-
-    return (
-        <div className="divStyle">
-            <button onClick={goToLink} className="buttonStyleCategories">
-                Characters
-                <a href={link}></a>
-            </button>
-
-            <button onClick={goToLink} className="buttonStyleCategories">
-                Episodes
-                <a href={link}></a>
-            </button>
-
-            <button onClick={goToLink} className="buttonStyleCategories">
-                Locations
-                <a href={link}></a>
-            </button>
+return (
+    <div>
+        <h1 className="TittleH1">Bienvenido a mi API de Rick y Morty</h1>
+        <div>
+            <ul className="listaUl">
+                <li><button onClick={() => { setSeccion("characters") }}>Personajes</button></li>
+                <li><button onClick={() => { setSeccion("locations") }}>ubicaciones</button></li>
+                <li><button onClick={() => { setSeccion("episodes") }}>Episodios</button></li>
+            </ul>
         </div>
-    );
+
+        <div>
+            {seccion == "characters" && <Characters />}
+            {seccion == "locations" && <Locations />}
+            {seccion == "episodes" && <Episodes />}
+        </div>
+    </div>
+)
 }
