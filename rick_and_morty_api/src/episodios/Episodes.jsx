@@ -1,48 +1,50 @@
-import React from "react";
 import { useState, useEffect } from 'react'
 
 export const Episodes = () => {
 
-    const [data, setData] = useState([])
+    const [episodios, setEpisodios] = useState([])
+    const [filter, setFilter] = useState("")
+    const [errorData, setErrorData] = useState("")
     const [info, setInfo] = useState({
-        count: 0,
-        next: null,
+        page: 0,
         prev: null,
-        pages: 0
-    });
+        next: null,
+        count: 0
+    })
 
     useEffect(() => {
-        getData()
+        setEpisodios('https://rickandmortyapi.com/api/episode')
     }, [])
 
-    const getData = async () => {
-        try {
-            const respuesta = await fetch("https://rickandmortyapi.com/api/episode")
-            const objJs = await respuesta.json()
-            setData(objJs)
+    const getEpisodios = async (url) => {
+        const respuesta = await fetch(url)
+        const objeto = await respuesta.json()
+
+        // a veces devuelve error en lugar de results
+        if(objeto.error) {
+            setErrorData("No hay resultados");
+            setEpisodios([])
+            setInfo({})
+        } else {
+            setErrorData("")
+            setEpisodios(objeto.results)
+            setInfo(objeto.info)
+        }
         
-    } catch (e) {
-        console.error("Hay un error obteniendo datos")
+    }
+
+    const handleFilterByName = (e) => {
+        const string = e.target.value;
+        setFilter(string);
+        console.log(string)
+        if(string.trim().length > 3) {
+            getEpisodios(`https://rickandmortyapi.com/api/episode/?name=${string.trim()}`)
         }
     }
 
     return (
-        <div className="divContainer">
-            {
-                data.map(({ id, name, air_date, episode, characters, url, created }) => {
-
-                    return (
-                        <div key={id} className="divCard">
-                            <h2 className="h2Style">{name}</h2>
-                            <h3 className="h3Style">{air_date}</h3>
-                            <h3 className="h3Style">{episode}</h3>
-                            <h3 className="h3Style">{characters}</h3>
-                            <p className="pStyle">{url}</p>
-                            <p className="pStyle">{created}</p>
-                        </div>
-                    )
-                })
-            }
-        </div>
+        <section>
+            <h3>Episodios</h3>
+        </section>
     );
 }
