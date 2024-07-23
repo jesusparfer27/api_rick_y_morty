@@ -29,7 +29,7 @@ function App() {
 
                 {/* v3.  Navegación con ReactcRouter */}
                 <li><NavLink to="/characters" className="Button-Link">Personajes</NavLink></li>
-                <li><NavLink to="/episodes" className="Button-Link">Episodios</NavLink></li>
+                <li><NavLink to="/episodios" className="Button-Link">Episodios</NavLink></li>
                 <li><NavLink to="/locations" className="Button-Link">Ubicaciones</NavLink></li>
 
               </ul>
