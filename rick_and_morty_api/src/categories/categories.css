@@ -10,3 +10,35 @@
     font-size: 1.5rem;
     justify-content: center;
 }
+
+.Button-Link.active{
+    color: red;
+}
+
+.Button-Link {
+    border-radius: 8px;
+    border: 1px solid transparent;
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    background-color: #1a1a1a;
+    cursor: pointer;
+    transition: border-color 0.25s;
+  }
+  .Button-Link:hover {
+    border-color: #646cff;
+  }
+  .Button-Link:focus,
+  .Button-Link:focus-visible {
+    outline: 4px auto -webkit-focus-ring-color;
+  }
+
+  @media (prefers-color-scheme: ligth) {
+    a:hover{
+        color: #747bff;
+    } 
+    .Button-Link {
+        background-color: #f9f9f9;
+    }
+  }

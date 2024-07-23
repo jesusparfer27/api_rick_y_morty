@@ -1,7 +1,3 @@
-html {
-    background-color: r;
-}
-
 .charactersContainer {
     display: flex;
     justify-content: center;
@@ -20,3 +16,4 @@ html {
     flex-wrap: wrap;
     justify-content: center;
 }
+
