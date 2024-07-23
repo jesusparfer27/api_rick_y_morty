@@ -1,0 +1,10 @@
+.H1Style {
+    font-size: 3rem;
+    text-align: center;
+    margin: 2rem;
+}
+
+.flexGridLocations {
+    display: grid;
+    grid-template-rows: auto;
+}

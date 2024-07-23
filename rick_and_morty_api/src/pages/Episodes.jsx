@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import '../css/episodes.css'
 
 export const Episodes = () => {
 
@@ -13,7 +14,7 @@ export const Episodes = () => {
     })
 
     useEffect(() => {
-        setEpisodios('https://rickandmortyapi.com/api/episode')
+        getEpisodios('https://rickandmortyapi.com/api/episode')
     }, [])
 
     const getEpisodios = async (url) => {
@@ -25,6 +26,7 @@ export const Episodes = () => {
             setErrorData("No hay resultados");
             setEpisodios([])
             setInfo({})
+            return;
         } else {
             setErrorData("")
             setEpisodios(objeto.results)
@@ -44,40 +46,49 @@ export const Episodes = () => {
 
     return (
         <section>
-            <h3>Episodios</h3>
+            <h1 className='H1Tittle'>Episodios</h1>
+
             <div className="flexBetween">
-                <button disabled={!info.prev} onClick={() => { setEpisodios(info.prev) }}>Ant</button>
-                <div className="flexCenter">
+                <div className="itemsStart1">
                     <input type="text"
                         onChange={handleFilterByName}
                         value={filter}
-                        placeholder='Buscar Personajes (4 chars)'
-                        style={{ width: "200px" }
+                        placeholder='Buscar Episodios (4 chars)'
+                        style={{ width: "400px" }
                         } />
                     {filter} ({info.count})
-                    <button className='flexCenter' style={{ background: "red", color: "white", padding: "5px", width: "20px", height: "20px", fontSize: "small" }} onClick={
+
+                    <button className='x' style={{ background: "red", color: "white", padding: "1px", width: "30px", height: "30px", fontSize: "small" }} onClick={
                         () => {
                             setFilter("");
                             getEpisodios("https://rickandmortyapi.com/api/episode")
                         }
                     }>X</button>
                 </div>
-
-                <button disabled={!info.next} onClick={() => { getEpisodios(info.next) }}>Sig</button>
+                <div className='itemsStart2'>
+                    <button disabled={!info.prev} onClick={() => { setEpisodios(info.prev) }}>Ant</button>
+                    <button disabled={!info.next} onClick={() => { getEpisodios(info.next) }}>Sig</button>
+                </div>
             </div>
 
-            <div className="flexGrid">
+
+
+            <div className="flexGridEpisodes">
                 {errorData && <div>{errorData}</div>}
                 {
                     episodios.map((episode, index) => <EpisodeCard key={episode.id} {...episode} index={index} />
                     )
                 }
             </div>
+            <div className="flexBetween">
+                <button disabled={!info.prev} onClick={() => { setEpisodios(info.prev) }}>Ant</button>
+                <button disabled={!info.next} onClick={() => { getEpisodios(info.next) }}>Sig</button>
+            </div>
         </section>
     );
 }
 
-const EpisodeCard = ({ id, name, air_date }) => {
+const EpisodeCard = ({ name, air_date, episode }) => {
 
     // index no es id, viene del map para animar los elementos con un multiplicador
 
@@ -90,8 +101,10 @@ const EpisodeCard = ({ id, name, air_date }) => {
     return (
         <article className='Card'>
             <h2 className="h2Style">{name}</h2>
-            <h3 className='h3Style'>{air_date}</h3>
-
+            <div className="flexInfo">
+                <h3 className='h3Style'>{air_date}</h3>
+                <strong className='strongEpisode'>{episode}</strong>
+            </div>
         </article>
     )
 

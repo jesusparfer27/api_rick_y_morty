@@ -1,20 +1,19 @@
 import './App.css'
-import { Episodes } from './episodios/Episodes'
-import { Locations } from './ubicaciones/Locations'
-import { Characters } from './personajes/Characters'
-// import { Categories } from './categories/Categories'
+import { Episodes } from './pages/Episodes'
+import { Characters } from './pages/Characters'
+import { Locations } from './pages/Locations'
 import { BrowserRouter as Router, Route, Routes, Link, NavLink } from 'react-router-dom'
+import logo from './image/imgLogoApi.png'
 
 
 function App() {
 
   return (
-    <>
       <Router>
-        <main className='Container'>
           <header className='Header'>
-
-            <h1 className='Header-Title'>Rick and Morty</h1>
+          <div className='logoDiv'>
+            <img src={logo} className="App-logo" alt={logo} />
+            </div>
             <nav>
               <ul className='Nav-Link'>
                 {/* v1  */}
@@ -29,7 +28,7 @@ function App() {
 
                 {/* v3.  Navegación con ReactcRouter */}
                 <li><NavLink to="/characters" className="Button-Link">Personajes</NavLink></li>
-                <li><NavLink to="/episodios" className="Button-Link">Episodios</NavLink></li>
+                <li><NavLink to="/episodes" className="Button-Link">Episodios</NavLink></li>
                 <li><NavLink to="/locations" className="Button-Link">Ubicaciones</NavLink></li>
 
               </ul>
@@ -44,17 +43,12 @@ function App() {
           <div className="Content">
             {/* Posibles rutas */}
             <Routes>
-              <Route path="/personajes" element={<Characters />} />
-              <Route path="/episodios" element={<Episodes />} />
-              <Route path="/ubicaciones" element={<Locations />} />
-              {/* Ruta principal  */}
-              {/* //                 <Route path="/" element={<Categories/>} /> */}
+              <Route path="/characters" element={<Characters />} />
+              <Route path="/episodes" element={<Episodes />} />
+              <Route path="/locations" element={<Locations />} />
             </Routes>
           </div>
-        </main>
       </Router>
-      {/* <Categories/> */}
-    </>
   )
 }
 

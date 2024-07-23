@@ -1,9 +1,3 @@
-.TittleH1 {
-    font-size: 3rem;
-    text-align: center;
-    margin: 2rem;
-}
-
 .listaUl {
     display: flex;
     gap: 3rem;
@@ -46,6 +40,14 @@
     outline: 4px auto -webkit-focus-ring-color;
   }
 
+  .logoDiv {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+
+
   @media (prefers-color-scheme: ligth) {
     a:hover{
         color: #747bff;
@@ -54,3 +56,4 @@
         background-color: #f9f9f9;
     }
   }
+

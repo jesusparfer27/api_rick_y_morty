@@ -1,0 +1,64 @@
+.H1Tittle {
+    text-align: center;
+    font-size: 3rem;
+    margin: 2rem;
+}
+
+.flexBetween {
+    display: flex;
+    justify-content: space-between;
+    margin-right: 4rem;
+    margin-left: 4rem;
+}
+
+.itemsStart1 input{
+    padding: .5rem;
+    border-radius: .4rem;
+}
+
+.itemsStart2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 3rem;
+}
+
+.x{
+    color: beige;
+}
+
+.flexCenter {
+    display: flex;
+    justify-content: center;
+}
+
+.flexCenter input {
+    border-radius: 1rem;
+}
+
+.flexGrid {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+}
+
+.flexBetween button{
+    border: 1px solid white;
+    padding: .6rem 1.2rem;
+    border-radius: .4rem;
+}
+
+.Card {
+    margin: 2.5rem;
+    padding: 1rem;
+    border: 1px solid white;
+}
+
+.h2Style {
+    font-size: 1.5rem;
+}
+
+.flexInfo {
+    display: flex;
+    justify-content: space-between;
+}
