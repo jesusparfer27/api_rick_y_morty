@@ -72,3 +72,13 @@
     display: flex;
     justify-content: space-between;
 }
+
+.strongEpisode {
+    color: #ccff00;
+}
+
+h3 {
+    color: white;
+}
+
+

@@ -72,11 +72,11 @@ export const Characters = () => {
                         onChange={handleFilterByName}
                         value={filter}
                         placeholder="Buscar Personajes (4 chars)"
-                        style={{ width: "400px" }
+                        style={{ width: "400px", backgroundColor: "#ccff00", color: "black"}
                         } />
-                    {filter} ({info.count})
+                         {filter} ({info.count})
 
-                    <button className='x' style={{ background: "red", color: "white", padding: "1px", width: "30px", height: "30px", fontSize: "small" }} onClick={
+                    <button className='x' style={{ background: "#ccff00", color: "black", padding: "1px", width: "30px", height: "30px", fontSize: "small" }} onClick={
                         () => {
                             setFilter("");
                             getCharacters("https://rickandmortyapi.com/api/character")
