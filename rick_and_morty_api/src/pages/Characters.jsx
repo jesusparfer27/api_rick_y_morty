@@ -3,15 +3,21 @@ import '../css/characters.css'
 
 export const Characters = () => {
 
+    const [charactersPerPage, setCharactersPerPage] = useState(8)
+    const [currentPage, setCurrentPage] = useState(1)
     const [characters, setCharacters] = useState([])
     const [errorData, setErrorData] = useState("")
     const [filter, setFilter] = useState("")
+    const [buttonFilter, setButtonFilter] = useState("All")
     const [info, setInfo] = useState({
         count: 0,
         prev: null,
         next: null,
         page: 0
     })
+
+    const lastIndex = currentPage * charactersPerPage
+    const firstIndex = lastIndex - charactersPerPage
 
     useEffect(() => {
         getCharacters("https://rickandmortyapi.com/api/character")
@@ -41,6 +47,20 @@ export const Characters = () => {
         }
     }
 
+    const handleFilterByStatus = (status) => {
+        setButtonFilter(status);
+        if (status === "All") {
+            getCharacters("https://rickandmortyapi.com/api/character")
+        } else {
+            getCharacters(`https://rickandmortyapi.com/api/character/?status=${status}`)
+        }
+    }
+
+    const filteredCharacters = buttonFilter === "All" 
+    ? characters 
+    : characters.filter(character => character.status.toLowerCase() === buttonFilter.toLowerCase());
+
+
 
     return (
         <section>
@@ -63,35 +83,60 @@ export const Characters = () => {
                         }
                     }>X</button>
                 </div>
-                <div className="itemsStart2">
-                    <button disabled={!info.prev} onClick={() => { setCharacters(info.prev) }}>Ant</button>
-                    <button disabled={!info.next} onClick={() => { getCharacters(info.next) }}>Sig</button>
+                <div className="panelControl-filtros">
+                    <div className='filterByStatus'>
+                        <button className={`${buttonFilter == "alive" ? "btnA" : ""}`} onClick={() => handleFilterByStatus("Alive")}>alive</button>
+                        <button className={`${buttonFilter == "dead" ? "btnA" : ""}`} onClick={() => handleFilterByStatus("Dead")}>dead</button>
+                        <button className={`${buttonFilter == "unknown" ? "btnA" : ""}`} onClick={() => handleFilterByStatus("Unknown")}>unknown</button>
+                        <button className={`${buttonFilter == "all" ? "btnA" : ""}`} onClick={() => handleFilterByStatus("All")}>all</button>
+                    </div>
+                </div>
+                <div className="itemsStart3">
+                    <button className='buttonPage' disabled={!info.prev} onClick={() => { setCharacters(info.prev) }}>Ant</button>
+                    <button className='buttonPage' disabled={!info.next} onClick={() => { getCharacters(info.next) }}>Sig</button>
                 </div>
             </div>
 
             <div className="flexGridCharacters">
                 {errorData && <div>{errorData}</div>}
                 {
-                    characters.map((character, index) => <CharacterCard key={character.id} {...character} index={index} />
+                    characters.slice(firstIndex, lastIndex).map((character, index) => <CharacterCard key={character.id} {...character} index={index} />
                     )
                 }
             </div>
             <div className="flexBetween">
-                <button disabled={!info.prev} onClick={() => { setCharacters(info.prev) }}>Ant</button>
-                <button disabled={!info.next} onClick={() => { getCharacters(info.next) }}>Sig</button>
+                <button className='buttonPage' disabled={!info.prev} onClick={() => { setCharacters(info.prev) }}>Ant</button>
+                <button className='buttonPage' disabled={!info.next} onClick={() => { getCharacters(info.next) }}>Sig</button>
             </div>
         </section>
     );
 }
 
-const CharacterCard = ({image, name, status, species}) => {
+const CharacterCard = ({ image, name, status, species }) => {
     return (
         <article className="Card">
-            <img src={image} alt={name} />
             <h2 className="h2Style">{name}</h2>
-            <strong className="strongStyle">{status}</strong>
-            <strong className="strongStyle">{species}</strong>
-            <p>{origin.name}</p>
+            <img className='imageCard' style={{ display: "flex", justifyContent: "center" }} src={image} alt={name} />
+
+            <div className="characterData">
+                {
+                    status === "Alive" && (
+                        <span className='alive'>STATUS: {status}</span>
+                    )
+                }
+                {
+                    status === "Dead" && (
+                        <span className='dead'>STATUS: {status}</span>
+                    )
+                }
+                {
+                    status === "unknown" && (
+                        <span className='other'>STATUS: {status}</span>
+                    )
+                }
+                <h3>{species}</h3>
+                <p>{origin.name}</p>
+            </div>
         </article>
     )
 }

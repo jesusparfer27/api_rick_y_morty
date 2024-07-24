@@ -1,10 +1,21 @@
 .H1Style {
-    font-size: 3rem;
+    font-size: 4rem;
     text-align: center;
     margin: 2rem;
+    color: #ccff00;
+    padding-top: 2rem;
 }
 
 .flexGridLocations {
     display: grid;
     grid-template-rows: auto;
+}
+
+.buttonPage:hover{
+    background-color: #ccff00;
+    color: black;
+}
+
+.buttonPage {
+    max-height: 3rem;
 }

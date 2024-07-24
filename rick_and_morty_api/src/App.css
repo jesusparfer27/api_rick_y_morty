@@ -1,3 +1,12 @@
+@font-face {
+  font-family: "RM";
+  src: url("./assets/get_schwifty.ttf");
+}
+
+h1 {
+  font-family: "RM";
+}
+
 .listaUl {
     display: flex;
     gap: 3rem;

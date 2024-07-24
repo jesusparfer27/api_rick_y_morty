@@ -1,9 +1,10 @@
-import React from "react";
 import { useState, useEffect } from 'react'
 import '../css/locations.css'
 
 export const Locations = () => {
 
+    const [locationsPerPage, setLocationsPerPage] = useState(8)
+    const [currentPage, setCurrentPage] = useState(1)
     const [filter, setFilter] = useState("")
     const [locations, setLocations] = useState([])
     const [errorData, setErrorData] = useState("")
@@ -13,6 +14,9 @@ export const Locations = () => {
         next: null,
         page: 0
     })
+
+    const lastIndex = currentPage * locationsPerPage
+    const firstIndex = lastIndex - locationsPerPage
 
     useEffect(() => {
         getLocations('https://rickandmortyapi.com/api/location')
@@ -66,21 +70,24 @@ export const Locations = () => {
                     }>X</button>
                 </div>
                 <div className="itemsStart2">
-                    <button disabled={!info.prev} onClick={() => setLocations(info.prev)}>Ant</button>
-                    <button disabled={!info.next} onClick={() => setLocations(info.next)}>Sig</button>
+                    
+                </div>
+                <div className="itemsStart3">
+                    <button className='buttonPage' disabled={!info.prev} onClick={() => setLocations(info.prev)}>Ant</button>
+                    <button className='buttonPage' disabled={!info.next} onClick={() => setLocations(info.next)}>Sig</button>
                 </div>
             </div>
 
             <div className="flexGridLocations">
                 {errorData && <div>{errorData} </div>}
                 {
-                    locations.map((location, index) => <LocationsCard key={location.id} {...location} index={index} />
+                    locations.slice(firstIndex, lastIndex).map((location, index) => <LocationsCard key={location.id} {...location} index={index} />
                     )
                 }
             </div>
             <div className="flexBetween">
-                    <button disabled={!info.prev} onClick={() => setLocations(info.prev)}>Ant</button>
-                    <button disabled={!info.next} onClick={() => setLocations(info.next)}>Sig</button>
+                    <button className='buttonPage' disabled={!info.prev} onClick={() => setLocations(info.prev)}>Ant</button>
+                    <button className='buttonPage' disabled={!info.next} onClick={() => setLocations(info.next)}>Sig</button>
                 </div>
         </section>
     );

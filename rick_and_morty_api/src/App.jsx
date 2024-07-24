@@ -4,6 +4,7 @@ import { Characters } from './pages/Characters'
 import { Locations } from './pages/Locations'
 import { BrowserRouter as Router, Route, Routes, Link, NavLink } from 'react-router-dom'
 import logo from './image/imgLogoApi.png'
+import imageBackground from './image/imageBackground.jpg'
 
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
         //         {seccion == "episodes" && <Episodes />} */}
 
           {/* Esta versión utiliza react-router */}
+          <main className='mainContent'>
           <div className="Content">
             {/* Posibles rutas */}
             <Routes>
@@ -48,7 +50,10 @@ function App() {
               <Route path="/locations" element={<Locations />} />
             </Routes>
           </div>
+          </main>
       </Router>
+      
+      
   )
 }
 

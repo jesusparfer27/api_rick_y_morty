@@ -3,6 +3,8 @@ import '../css/episodes.css'
 
 export const Episodes = () => {
 
+    const [episodesPerPage, setEpisodesPerPage] = useState(8)
+    const [currentPage, setCurrentPage] = useState(1)
     const [episodios, setEpisodios] = useState([])
     const [filter, setFilter] = useState("")
     const [errorData, setErrorData] = useState("")
@@ -12,6 +14,10 @@ export const Episodes = () => {
         next: null,
         count: 0
     })
+
+    const lastIndex = currentPage * episodesPerPage
+    const firstIndex = lastIndex - episodesPerPage
+
 
     useEffect(() => {
         getEpisodios('https://rickandmortyapi.com/api/episode')
@@ -65,9 +71,12 @@ export const Episodes = () => {
                         }
                     }>X</button>
                 </div>
-                <div className='itemsStart2'>
-                    <button disabled={!info.prev} onClick={() => { setEpisodios(info.prev) }}>Ant</button>
-                    <button disabled={!info.next} onClick={() => { getEpisodios(info.next) }}>Sig</button>
+                <div className="itemsStart2">
+
+                </div>
+                <div className='itemsStart3'>
+                    <button className='buttonPage' disabled={!info.prev} onClick={() => { setEpisodios(info.prev) }}>Ant</button>
+                    <button className='buttonPage' disabled={!info.next} onClick={() => { getEpisodios(info.next) }}>Sig</button>
                 </div>
             </div>
 
@@ -76,13 +85,13 @@ export const Episodes = () => {
             <div className="flexGridEpisodes">
                 {errorData && <div>{errorData}</div>}
                 {
-                    episodios.map((episode, index) => <EpisodeCard key={episode.id} {...episode} index={index} />
+                    episodios.slice(firstIndex, lastIndex).map((episode, index) => <EpisodeCard key={episode.id} {...episode} index={index} />
                     )
                 }
             </div>
             <div className="flexBetween">
-                <button disabled={!info.prev} onClick={() => { setEpisodios(info.prev) }}>Ant</button>
-                <button disabled={!info.next} onClick={() => { getEpisodios(info.next) }}>Sig</button>
+                <button className='buttonPage' disabled={!info.prev} onClick={() => { setEpisodios(info.prev) }}>Ant</button>
+                <button className='buttonPage' disabled={!info.next} onClick={() => { getEpisodios(info.next) }}>Sig</button>
             </div>
         </section>
     );
